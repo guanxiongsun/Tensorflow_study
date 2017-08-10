@@ -17,21 +17,21 @@ y_ = tf.placeholder(tf.float32, shape=[None,10]);
 
 #NO RELU;NO regularize
 
-#w1 = tf.Variable(tf.zeros(shape=[784,64]));
-#b1 = tf.Variable(tf.zeros(shape=[1,64]));
-#y1 = tf.matmul(x, w1) + b1;#[N,64]
-#
-#w2 = tf.Variable(tf.zeros([64,64]));
-#b2 = tf.Variable(tf.zeros([1,64]));
-#y_2 = tf.matmul(y1, w2) + b2;#[N,64]
-#
-#w3 = tf.Variable(tf.zeros([64,10]));
-#b3 = tf.Variable(tf.zeros([1,10]));
-#y_p = tf.matmul(y_2, w3) + b3;#[N,10]
+w1 = tf.Variable(tf.truncated_normal(shape=[784,64],stddev=0.1));
+b1 = tf.Variable(tf.constant(0.1,shape=[1,64]));
+y1 = tf.matmul(x, w1) + b1;#[N,64]
 
-w = tf.Variable(tf.zeros(shape=[784,10]));
-b = tf.Variable(tf.zeros(shape=[1,10]));
-y_p = tf.matmul(x, w) + b;#[N,10]
+w2 = tf.Variable(tf.truncated_normal(shape=[64,64],stddev=0.1));
+b2 = tf.Variable(tf.constant(0.1,shape=[1,64]));
+y_2 = tf.matmul(y1, w2) + b2;#[N,64]
+
+w3 = tf.Variable(tf.truncated_normal(shape=[64,10],stddev=0.1));
+b3 = tf.Variable(tf.constant(0.1,shape=[1,10]));
+y_p = tf.matmul(y_2, w3) + b3;#[N,10]
+
+#w = tf.Variable(tf.zeros(shape=[784,10]));
+#b = tf.Variable(tf.zeros(shape=[1,10]));
+#y_p = tf.matmul(x, w) + b;#[N,10]
 
 cross_entropy = tf.reduce_mean(
         tf.nn.softmax_cross_entropy_with_logits(labels=y_,logits=y_p))
