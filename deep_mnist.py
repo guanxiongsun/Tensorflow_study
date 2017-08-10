@@ -96,7 +96,7 @@ with tf.Session() as sess:
     batch = mnist.train.next_batch(256)
     if i % 10 == 0:
       train_accuracy = accuracy.eval(feed_dict={
-          x: batch[0], y_: batch[1], keep_prob:1.0})
+      x: mnist.validation.images, y_: mnist.validation.labels, keep_prob:1.0})
       print('step %d, training accuracy %g' % (i, train_accuracy))
     train_step.run(feed_dict={x: batch[0], y_: batch[1], keep_prob: 0.5});
     if i % 500 == 0:
