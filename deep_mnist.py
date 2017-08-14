@@ -94,7 +94,7 @@ with tf.Session() as sess:
   sess.run(tf.global_variables_initializer())
   for i in range(5000):
     batch = mnist.train.next_batch(256)
-    if i % 10 == 0:
+    if i % 100 == 0:
       train_accuracy = accuracy.eval(feed_dict={
           x: batch[0], y_: batch[1], keep_prob:1.0})
       print('step %d, training accuracy %g' % (i, train_accuracy))
@@ -103,5 +103,9 @@ with tf.Session() as sess:
       test_accuracy = accuracy.eval(
               {x:mnist.test.images, y_:mnist.test.labels, keep_prob:1.0 });
       print('step %d, testing accuracy ----------> %g' % (i, test_accuracy));
+
+test_accuracy = accuracy.eval(
+              {x:mnist.test.images, y_:mnist.test.labels, keep_prob:1.0 });
+print('step %d, testing accuracy ----------> %g' % (i, test_accuracy));
 
 
